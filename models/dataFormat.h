@@ -12,13 +12,13 @@ typedef struct {
 }Node;
 
 typedef struct {
-    Node *data;
+    Node **data;
     int len;
     int size;
 }Row;
 
 typedef struct {
-    Row *data;
+    Row **data;
     int len;
     int size;
 }Col;
