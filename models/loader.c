@@ -74,7 +74,7 @@ void loadData(Node *node, char *data) {
     if (data_len == 0) {
         return;
     }
-    while (node->len + data_len > node->size) {
+    while (node->len + data_len >= node->size) {
         extendNode(node);
     }
     strcpy(node->str + node->len, data);
@@ -164,7 +164,7 @@ void appendRow(Row *row, Node *node) {
     if (node == NULL) {
         return;
     }
-    if (row->len > row->size) {
+    if (row->len >= row->size) {
         extendRow(row);
     }
     row->data[row->len] = node;
@@ -248,7 +248,7 @@ void appendGrid(Grid *grid, Row *row) {
     if (row == NULL) {
         return;
     }
-    if (grid->len > grid->size) {
+    if (grid->len >= grid->size) {
         extendGrid(grid);
     }
     grid->data[grid->len] = row;
