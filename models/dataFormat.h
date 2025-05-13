@@ -21,6 +21,6 @@ typedef struct {
     Row **data;
     int len;
     int size;
-}Col;
+}Grid;
 
 #endif //DATAFORMAT_H

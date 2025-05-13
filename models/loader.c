@@ -102,7 +102,6 @@ void overwriteData(Node *node, char *data) {
 
 /**
  * 创建行
- * @param node
  * @return
  */
 Row *createRow() {
@@ -189,82 +188,82 @@ void overwriteRow(Row *row, Node *node) {
  * 创建列
  * @return
  */
-Col *createCol() {
-    Col *col = (Col *) malloc(sizeof(Col));
-    col->len = 0;
-    col->size = INIT_COL_SIZE;
-    col->data = (Row **) malloc(col->size * sizeof(Row *));
-    return col;
+Grid *createGrid() {
+    Grid *grid = (Grid *) malloc(sizeof(Grid));
+    grid->len = 0;
+    grid->size = INIT_COL_SIZE;
+    grid->data = (Row **) malloc(grid->size * sizeof(Row *));
+    return grid;
 }
 
 /**
  * 拓展列空间
- * @param col
+ * @param grid
  */
-void extendCol(Col *col) {
-    Row **temp = realloc(col->data, ((int) col->size * EXTEND_X) * sizeof(Row *));
+void extendGrid(Grid *grid) {
+    Row **temp = realloc(grid->data, ((int) grid->size * EXTEND_X) * sizeof(Row *));
     if (temp == NULL) {
         printf("列空间拓展失败\n");
         return;
     }
-    col->data = temp;
-    col->size = (int) col->size * EXTEND_X;
+    grid->data = temp;
+    grid->size = (int) grid->size * EXTEND_X;
 }
 
 /**
  * 清空列
- * @param col
+ * @param grid
  */
-void clearCol(Col *col) {
-    col->len = 0;
-    for (int i = 0; i < col->size; i++) {
-        freeRow(&col->data[i]);
+void clearGrid(Grid *grid) {
+    grid->len = 0;
+    for (int i = 0; i < grid->size; i++) {
+        freeRow(&grid->data[i]);
     }
-    free(col->data);
-    col->size = INIT_COL_SIZE;
-    col->data = (Row **) malloc(col->size * sizeof(Row *));
+    free(grid->data);
+    grid->size = INIT_COL_SIZE;
+    grid->data = (Row **) malloc(grid->size * sizeof(Row *));
 }
 
 /**
  * 释放列
- * @param col
+ * @param grid
  */
-void freeCol(Col **col) {
-    if (*col == NULL) {
+void freeGrid(Grid **grid) {
+    if (*grid == NULL) {
         return;
     }
-    for (int i = 0; i < (*col)->len; i++) {
-        freeRow(&(*col)->data[i]);
+    for (int i = 0; i < (*grid)->len; i++) {
+        freeRow(&(*grid)->data[i]);
     }
-    free((*col)->data);
-    free(*col);
+    free((*grid)->data);
+    free(*grid);
 }
 
 /**
  * 添加列
- * @param col
+ * @param grid
  * @param row
  */
-void appendCol(Col *col, Row *row) {
+void appendGrid(Grid *grid, Row *row) {
     if (row == NULL) {
         return;
     }
-    if (col->len > col->size) {
-        extendCol(col);
+    if (grid->len > grid->size) {
+        extendGrid(grid);
     }
-    col->data[col->len] = row;
-    col->len++;
+    grid->data[grid->len] = row;
+    grid->len++;
 }
 
 /**
  * 覆写列
- * @param col
+ * @param grid
  * @param row
  */
-void overwriteCol(Col *col, Row *row) {
-    clearCol(col);
+void overwriteGrid(Grid *grid, Row *row) {
+    clearGrid(grid);
     if (row == NULL) {
         return;
     }
-    appendCol(col, row);
+    appendGrid(grid, row);
 }

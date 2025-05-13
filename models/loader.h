@@ -30,16 +30,16 @@ void appendRow(Row *row, Node *node);
 
 void overwriteRow(Row *row, Node *node);
 
-Col *createCol();
+Grid *createGrid();
 
-void extendCol(Col *col);
+void extendGrid(Grid *grid);
 
-void clearCol(Col *col);
+void clearGrid(Grid *grid);
 
-void freeCol(Col **col);
+void freeGrid(Grid **grid);
 
-void appendCol(Col *col, Row *row);
+void appendGrid(Grid *grid, Row *row);
 
-void overwriteCol(Col *col, Row *row);
+void overwriteGrid(Grid *grid, Row *row);
 
 #endif //LOADER_H
