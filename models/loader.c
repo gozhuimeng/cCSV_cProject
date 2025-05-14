@@ -82,6 +82,19 @@ void loadData(Node *node, char *data) {
 }
 
 /**
+ * 追加字符
+ * @param node
+ * @param c
+ */
+void appendChar(Node *node, char c) {
+    if (node->len == node->size) {
+        extendNode(node);
+    }
+    node->str[node->len] = c;
+    node->len++;
+}
+
+/**
  * 覆写数据
  * @param node
  * @param data

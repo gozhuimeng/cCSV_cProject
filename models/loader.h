@@ -16,6 +16,8 @@ void freeNode(Node **node);
 
 void loadData(Node *node, char *data);
 
+void appendChar(Node *node, char c);
+
 void overwriteData(Node *node, char *data);
 
 Row *createRow();
